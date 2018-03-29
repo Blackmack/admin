@@ -4,6 +4,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '../view/index.vue'
+import Test1 from '../view/test1.vue'
+import Test2 from '../view/test2.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -11,7 +13,18 @@ export default new Router({
     {
       path: '/',
       name: 'index',
-      component: Index
+      component: Index,
+      children: [
+        {
+          path: '/test1',
+          component: Test1
+        },
+        {
+          path: '/test2',
+          name: 'test2',
+          component: Test2
+        }
+      ]
     }
   ]
 })

@@ -1,8 +1,8 @@
 <template>
   <div id="topNav" class="topNav">
      <ul>
-       <li>xx,</li>
-       <li>退出</li>
+       <li></li>
+       <li></li>
      </ul>
   </div>
 </template>
@@ -15,6 +15,6 @@
   .topNav{
     height:80px;
     line-height:80px;
-    background-color:#5C5D5E;
+    background-color:rgb(84, 92, 100);
   }
 </style>
