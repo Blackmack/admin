@@ -8,6 +8,6 @@ if (process.env.NODE_ENV == 'development') {
 }else{
   baseUrl = 'http://cangdu.org:8001';
 }
-export {
+export default {
   baseUrl,
 }

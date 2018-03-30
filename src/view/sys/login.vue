@@ -8,7 +8,7 @@
         <el-input type="password" v-model="loginForm.password"></el-input>
       </el-form-item>
       <el-form-item label="验证码" prop="captcha">
-        <el-input v-model.number="loginForm.captcha"></el-input>
+        <el-input  type="text" v-model="loginForm.captcha"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm('loginForm')">提交</el-button>
@@ -18,24 +18,24 @@
   </div>
 </template>
 <script>
+
+  import {sysLogin} from '@/api/getData'
   export default {
     data() {
       var validateUsername = (rule, value, callback) => {
         if (!value) {
           return callback(new Error('用户名不能为空'));
         }
+        return callback();
       };
       var validatePass = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('请输入密码'));
         } else {
-          if (this.loginForm.checkPass !== '') {
-            this.$refs.loginForm.validateField('checkPass');
-          }
           callback();
         }
       };
-      var validateaptcha = (rule, value, callback) => {
+      var validateCaptcha = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('请输入图片验证码'));
         }
@@ -57,16 +57,22 @@
             { validator: validatePass, trigger: 'blur' }
           ],
           captcha: [
-            { validator: validateaptcha, trigger: 'blur' }
+            { validator: validateCaptcha, trigger: 'blur' }
           ]
         }
       };
     },
     methods: {
-      submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
+     async submitForm(formName) {
+        this.$refs[formName].validate(async (valid) => {
           if (valid) {
             alert('submit!');
+            const res = await sysLogin(this.loginForm)
+            console.log(res);
+//            this.$message({
+//              type: 'success',
+//              message: '登录成功'
+//            });
           } else {
             console.log('error submit!!');
             return false;
