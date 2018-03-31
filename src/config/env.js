@@ -4,10 +4,10 @@
 let baseUrl = '';
 
 if (process.env.NODE_ENV == 'development') {
-  baseUrl = 'http://www.mindsem.com:3100';
+  baseUrl = '/';
 }else{
   baseUrl = 'http://cangdu.org:8001';
 }
 export default {
-  baseUrl,
+  baseUrl
 }

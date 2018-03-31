@@ -67,15 +67,14 @@
      async submitForm(formName) {
         this.$refs[formName].validate(async (valid) => {
           if (valid) {
-            alert('submit!');
+              debugger
             const res = await sysLogin(this.loginForm)
             console.log(res);
-//            this.$message({
-//              type: 'success',
-//              message: '登录成功'
-//            });
+            this.$message({
+              type: 'success',
+              message: '登录成功'
+            });
           } else {
-            console.log('error submit!!');
             return false;
           }
         });
