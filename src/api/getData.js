@@ -3,4 +3,4 @@
  */
 import axios from '../config/axios'
 
-export const sysLogin = ()=>axios.post('/sys/login',payload)
+export const sysLogin = (data)=>axios.post('/sys/login',data)
