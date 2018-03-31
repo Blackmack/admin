@@ -6,7 +6,7 @@ let baseUrl = '';
 if (process.env.NODE_ENV == 'development') {
   baseUrl = '/';
 }else{
-  baseUrl = 'http://cangdu.org:8001';
+  baseUrl = '/';
 }
 export default {
   baseUrl
