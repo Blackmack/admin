@@ -5,6 +5,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import login from './modules/login'
 
+
 Vue.use(Vuex)
 const state = {
    user:{
@@ -19,7 +20,6 @@ const store = new Vuex.Store({
    state,
    modules:{
      login
-   },
-
+   }
 })
 export default store

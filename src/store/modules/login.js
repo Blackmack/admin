@@ -6,6 +6,6 @@ import {sysLogin} from '../../api/getData'
 const actions = {
   sysSignin ({commit},payload) {
     let result = sysLogin(payload)
-
   }
 }
+export default actions

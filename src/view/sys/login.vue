@@ -18,6 +18,7 @@
   </div>
 </template>
 <script>
+  import {mapState} from 'vuex'
   export default {
     data() {
       var validateUsername = (rule, value, callback) => {
@@ -62,6 +63,7 @@
         }
       };
     },
+    computed: mapState(['token']),
     methods: {
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
