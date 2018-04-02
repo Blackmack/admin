@@ -7,7 +7,7 @@ import env from './env'
 const instance = axios.create({
   baseURL:env.baseUrl,
   timeout:1000,
-  headers: {'X-Requested-with':'XMLHttpRequest','Content-Type': 'application/x-www-form-urlencoded'}
+  // headers: {'X-Requested-with':'XMLHttpRequest','Content-Type': 'application/x-www-form-urlencoded'}
 })
 
 axios.interceptors.request.use(function (config) {
