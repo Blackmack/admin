@@ -12,7 +12,7 @@ const state = {
      userId: '',
      userName: ''
    },
-   token:null
+   token:'888888'
 }
 
 

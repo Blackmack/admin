@@ -47,27 +47,35 @@
         loginForm: {
           username: '',
           password: '',
-          captcha: ''
+          captcha: '',
+          now:'2'
         },
         rules2: {
           username: [
-            { validator: validateUsername, trigger: 'blur' }
+            {validator: validateUsername, trigger: 'blur'}
           ],
           password: [
-            { validator: validatePass, trigger: 'blur' }
+            {validator: validatePass, trigger: 'blur'}
           ],
           captcha: [
-            { validator: validateCaptcha, trigger: 'blur' }
+            {validator: validateCaptcha, trigger: 'blur'}
           ]
         }
       };
     },
-    computed: mapState(['token']),
+    computed: {
+    ...mapState(['token']),
+      getNow:function () {
+        return Date.now()
+      }
+    },
     methods: {
      async submitForm(formName) {
+        this.getNow()
         this.$refs[formName].validate(async (valid) => {
           if (valid) {
             console.log(1);
+            this.commit('erere')
             const res = await sysLogin(this.loginForm)
             console.log(2);
             this.$message({
