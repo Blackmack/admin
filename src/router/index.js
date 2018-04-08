@@ -5,6 +5,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '../view/sys/login.vue'
 import Index from '../view/index.vue'
+import Category from '../view/category/category.vue'
 import Test1 from '../view/test1.vue'
 import Test2 from '../view/test2.vue'
 Vue.use(Router)
