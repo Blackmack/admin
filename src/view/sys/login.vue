@@ -18,7 +18,8 @@
   </div>
 </template>
 <script>
-  import {mapState} from 'vuex'
+  import {mapState, mapActions} from 'vuex'
+//  import {LOGIN} from '../../store/mutations-type'
   import {sysLogin} from '@/api/getData'
   export default {
     data() {
@@ -70,13 +71,15 @@
       }
     },
     methods: {
+      ...mapActions(['sysSignin']),
      async submitForm(formName) {
-        this.getNow()
-        this.$refs[formName].validate(async (valid) => {
+//        this.getNow()
+        this.$refs[formName].validate(async(valid) => {
           if (valid) {
             console.log(1);
-            this.commit('erere')
-            const res = await sysLogin(this.loginForm)
+//            this.commit('erere')
+            //const res = await sysLogin(this.loginForm)
+            const res = await this.sysSignin(this.loginForm);
             console.log(2);
             this.$message({
               type: 'success',
