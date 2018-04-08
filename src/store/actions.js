@@ -4,15 +4,15 @@
 import {sysLogin} from '../api/getData'
 import {LOGIN} from './mutations-type'
 
-export default {
-  // sysLogin({commit},params){
-  //
-  //   commit('Login',params)
-  // }
-  async sysSignin ({commit,state},payload) {
+const actions ={
+  async sysSignin({commit,state},payload) {
+    //这里commit可以提交到mutations
+    //state可直接取到state的值，作为参数来异步请求
     let res = await sysLogin(payload)
-    commit('Login',res)
+    commit(LOGIN,res)
   }
 }
+
+export default actions;
 
 
