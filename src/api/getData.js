@@ -4,3 +4,4 @@
 import axios from '../config/axios'
 
 export const sysLogin = (data)=>axios.post('/sys/login',data)
+export const getCategory = (data)=>axios.get('/generator/category/info',data)

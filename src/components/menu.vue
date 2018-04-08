@@ -33,7 +33,7 @@
               <i class="el-icon-setting"></i>
               <span slot="title">商家配置</span>
             </el-menu-item>
-            <el-menu-item index="5">
+            <el-menu-item index="/category">
               <i class="el-icon-news"></i>
               <span slot="title">品类管理</span>
             </el-menu-item>

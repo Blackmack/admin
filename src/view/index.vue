@@ -33,6 +33,7 @@
     height:100%;
     margin-left:0;
     padding:20px;
+    box-sizing: border-box;
   }
 </style>
 

@@ -3,17 +3,17 @@
  */
 import Vue from 'vue'
 import Router from 'vue-router'
-import Login from '../view/sys/login.vue'
-import Index from '../view/index.vue'
-import Test1 from '../view/test1.vue'
-import Test2 from '../view/test2.vue'
+import Login from '../view/sys/login'
+import Index from '../view/index'
+import Category from '../view/category/index'
+import Test2 from '../view/test2'
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path:'/login',
-      name:'login',
+      path: '/login',
+      name: 'login',
       component:Login
     },
     {
@@ -22,8 +22,8 @@ export default new Router({
       component: Index,
       children: [
         {
-          path: '/test1',
-          component: Test1
+          path: '/category',
+          component: Category
         },
         {
           path: '/test2',

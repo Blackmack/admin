@@ -19,3 +19,6 @@ button, input, select, textarea { font-size:100%; }
   clear: both;
   overflow: hidden;
 }
+.fl{
+  float: left;
+}
