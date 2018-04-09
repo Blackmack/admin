@@ -6,7 +6,7 @@
     </div>
     <div class="right-forms">
       <div class="form-content">
-         <el-form :label-position="labelPosition" label-width="80px" :model="categoryModel">
+         <el-form  label-width="80px" :model="categoryModel">
            <el-form-item label="名称">
              <el-input v-model="categoryModel.categoryName"></el-input>
            </el-form-item>
@@ -19,14 +19,17 @@
            <el-form-item label="级别">
              <el-input v-model="categoryModel.level"></el-input>
            </el-form-item>
-           <el-button type="primary" @click="onSubmit">立即创建</el-button>
-           <el-button>取消</el-button>
+           <el-form-item>
+             <el-button type="primary" @click="onSubmit">立即创建</el-button>
+             <el-button>取消</el-button>
+           </el-form-item>
          </el-form>
       </div>
     </div>
   </div>
 </template>
 <script>
+  import {mapActions} from 'vuex'
   export  default {
     data() {
       return{
@@ -79,8 +82,10 @@
       }
     },
     methods: {
+      ...mapActions(['getCategoryList']),
       onSubmit: function () {
-
+        let data=this.getCategoryList()
+        console.log(data)
       }
     }
   }
