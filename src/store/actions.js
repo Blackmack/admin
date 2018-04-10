@@ -11,6 +11,7 @@ const actions ={
     let res = await sysLogin(payload)
     commit(types.LOGIN,res)
   },
+  /******品类管理**************/
   async getCategoryList({commit,state}, payload) {
     let res= await getCategory(payload);
     return res;
@@ -27,6 +28,7 @@ const actions ={
     let res= await deleteCategory(payload);
     return res;
   }
+  /************商户管理****************/
 }
 
 export default actions;

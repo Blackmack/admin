@@ -9,3 +9,8 @@ export const getCategory = (data , payload)=>axios.get('/generator/category/info
 export const saveCategory = (data , payload)=>axios.post('/generator/category/save',data)
 export const updateCategory = (data , payload)=>axios.post('/generator/category/update',data)
 export const deleteCategory = (data , payload)=>axios.post('/generator/category/delete',data)
+/******商户管理***********/
+export const getMerchant = (data , payload)=>axios.get('/merchantAccount//info',data)
+export const saveMerchant = (data , payload)=>axios.post('/merchantAccount//save',data)
+export const updateMerchant = (data , payload)=>axios.post('/merchantAccount//update',data)
+export const delMerchant = (data , payload)=>axios.post('/merchantAccount/delete',data)

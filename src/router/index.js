@@ -6,7 +6,7 @@ import Router from 'vue-router'
 import Login from '../view/sys/login'
 import Index from '../view/index'
 import Category from '../view/category/index'
-import Test2 from '../view/test2'
+import Merchant from '../view/merchant/index'
 Vue.use(Router)
 
 export default new Router({
@@ -26,9 +26,9 @@ export default new Router({
           component: Category
         },
         {
-          path: '/test2',
-          name: 'test2',
-          component: Test2
+          path: '/merchant',
+          name: 'Merchant',
+          component: Merchant
         }
       ]
     }

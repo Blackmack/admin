@@ -29,7 +29,7 @@
               <i class="el-icon-document"></i>
               <span slot="title">物流公司管理</span>
             </el-menu-item>
-            <el-menu-item index="4">
+            <el-menu-item index="/merchant">
               <i class="el-icon-setting"></i>
               <span slot="title">商家配置</span>
             </el-menu-item>
