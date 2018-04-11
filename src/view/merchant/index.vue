@@ -1,27 +1,26 @@
 <template>
   <div class="list">
     <div class="query-condition">
-      <el-input v-model="input" size="medium"  placeholder="请输入商户号" clearable></el-input>
-      <el-input v-model="input" size="medium" placeholder="请输入简称" clearable></el-input>
-      <el-input v-model="input" size="medium" placeholder="请输入状态" clearable></el-input>
-      <el-input v-model="input" size="medium" placeholder="请输入类型" clearable></el-input>
-      <el-button type="primary" icon="el-icon-search">搜索</el-button>
+      <el-input v-model="searchInfo.merchant" size="medium"  placeholder="请输入商户号" clearable></el-input>
+      <el-input v-model="searchInfo.name" size="medium" placeholder="请输入简称" clearable></el-input>
+      <el-input v-model="searchInfo.status" size="medium" placeholder="请输入状态" clearable></el-input>
+      <el-input v-model="searchInfo.type" size="medium" placeholder="请输入类型" clearable></el-input>
+      <el-button type="primary" icon="el-icon-search" @click="getMechantList">搜索</el-button>
     </div>
     <div class="query-op">
       <el-button-group>
-        <el-button type="primary" icon="el-icon-plus"></el-button>
+        <el-button type="primary" icon="el-icon-plus" @click="dialogFormVisible = true"></el-button>
         <el-button type="primary" icon="el-icon-delete" @click="deleteItem"></el-button>
       </el-button-group>
     </div>
     <div class="list-table">
-      <el-table ref="multipleTable" :data="tableData3" border tooltip-effect="dark" style="width: 100%"
+      <el-table ref="multipleTable" v-loading="loading" :data="tableData" border tooltip-effect="dark" style="width: 100%"
         @selection-change="handleSelectionChange">
         <el-table-column type="selection" width="55">
         </el-table-column>
         <el-table-column prop="merchant" label="商户号" >
-          <template slot-scope="scope">{{ scope.row.date }}</template>
         </el-table-column>
-        <el-table-column prop="name" label="简称">
+        <el-table-column prop="abbreviations" label="简称">
         </el-table-column>
         <el-table-column prop="status" label="状态" >
         </el-table-column>
@@ -33,25 +32,156 @@
       <el-pagination
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
-        :current-page="currentPage"
+        :current-page="pagenation.currentPage"
         :page-sizes="[100, 200, 300, 400]"
         :page-size="100"
         layout="total, sizes, prev, pager, next, jumper"
         :total="400">
       </el-pagination>
     </div>
+    <el-dialog title="编辑商户信息" :visible.sync="dialogFormVisible">
+      <el-form :model="merchantModel">
+        <el-row>
+          <el-col :span="12">
+            <el-form-item label="商户号" :label-width="formLabelWidth">
+              <el-input v-model="merchantModel.merchant" auto-complete="off"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="商户类型" :label-width="formLabelWidth">
+              <el-select v-model="merchantModel.type" placeholder="请选择商户类型" style="width: 100%;">
+                <el-option label="银行" value="shanghai"></el-option>
+                <el-option label="卖肉的" value="beijing"></el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="12">
+            <el-form-item label="商户属性" :label-width="formLabelWidth">
+              <el-input v-model="merchantModel.attribute" auto-complete="off"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="状态" :label-width="formLabelWidth">
+              <el-select v-model="merchantModel.status" placeholder="请选择状态" style="width: 100%;">
+                <el-option label="2" value="shanghai"></el-option>
+                <el-option label="3" value="beijing"></el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="12">
+            <el-form-item label="商户全称" :label-width="formLabelWidth">
+              <el-input v-model="merchantModel.name" auto-complete="off"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="商户简称" :label-width="formLabelWidth">
+              <el-input v-model="merchantModel.abbreviations" auto-complete="off"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="12">
+            <el-form-item label="企业法人" :label-width="formLabelWidth">
+              <el-input v-model="merchantModel.legalPerson" auto-complete="off"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="商家地址" :label-width="formLabelWidth">
+              <el-input v-model="merchantModel.address" auto-complete="off"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="12">
+            <el-form-item label="联系电话" :label-width="formLabelWidth">
+              <el-input v-model="merchantModel.contactNumber" auto-complete="off"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="传真" :label-width="formLabelWidth">
+              <el-input v-model="merchantModel.fax" auto-complete="off"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="12">
+            <el-form-item label="合同号" :label-width="formLabelWidth">
+              <el-input v-model="merchantModel.contractNumber" auto-complete="off"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="认证时间" :label-width="formLabelWidth">
+              <el-date-picker v-model="merchantModel.authenticationDate" type="datetime" placeholder="选择日期时间" style="width: 100%;">
+              </el-date-picker>
+            </el-form-item>
+          </el-col>
+        </el-row>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 <script>
+  import {mapActions} from 'vuex'
   export default {
     data() {
       return {
+        loading:true,
+        dialogFormVisible:false,
+        tableData:[],
+        searchInfo:{
+          merchant:'',
+          name:'',
+          status:'',
+          type:''
+        },
+        merchantModel:{
+          merchant:'',
+          type:'',
+          attribute:'',
+          status:'',
+          name:'',
+          abbreviations:'',
+          legalPerson:'',
+          address:'',
+          contactNumber:'',
+          fax:'',
+          contractNumber:'',
+          authenticationDate:''
+        },
         pagenation: {
-          currentPage: 3,
-        }
+          currentPage: 1,
+        },
+        formLabelWidth: '120px'
       }
     },
+    mounted() {
+      this.getMechantList();
+    },
     methods: {
+      ...mapActions(['getMerchantList','saveMerchant','updateMerchant','deleteMerchant']),
+      getMechantList() {
+          let param=this.searchInfo;
+          this.getMerchantList(param).then((data) =>{
+              if(data.code==0){
+                this.loading = false;
+                this.tableData=data.date;
+              }
+              else{
+                this.$message(data.msg);
+              }
+          })
+      },
+      saveMerchant(){
+
+      },
       deleteItem() {
         this.$confirm('确实要删除?', '提示', {
           confirmButtonText: '确定',
@@ -63,6 +193,15 @@
             message: '删除成功!'
           });
         })
+      },
+      handleSelectionChange(){
+
+      },
+      handleSizeChange(){
+
+      },
+      handleCurrentChange(){
+
       }
     }
   }

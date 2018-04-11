@@ -1,7 +1,9 @@
 /**
  * Created by Administrator on 2018/3/29.
  */
-import {sysLogin,getCategory,saveCategory,updateCategory,deleteCategory} from '../api/getData'
+import {sysLogin,getCategory,saveCategory,updateCategory,deleteCategory,
+  getMerchant,saveMerchant,updateMerchant,delMerchant
+} from '../api/getData'
 import * as types  from './mutations-type'
 
 const actions ={
@@ -27,8 +29,25 @@ const actions ={
   async deleteCategory({commit,state}, payload) {
     let res= await deleteCategory(payload);
     return res;
-  }
+  },
   /************商户管理****************/
+  async getMerchantList({commit,state}, payload) {
+    let res= await getMerchant(payload);
+    return res.data;
+  },
+  async saveMerchant({commit,state}, payload) {
+    let res= await saveMerchant(payload);
+    return res.data;
+  },
+  async updateMerchant({commit,state}, payload) {
+    let res= await updateMerchant(payload);
+    return res.data;
+  },
+  async deleteMerchant({commit,state}, payload) {
+    let res= await delMerchant(payload);
+    return res.data;
+  }
+
 }
 
 export default actions;
