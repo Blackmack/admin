@@ -21,29 +21,11 @@
   import {mapState, mapActions} from 'vuex'
 //  import {LOGIN} from '../../store/mutations-type'
   import {sysLogin} from '@/api/getData'
+  import validate from '../common/validate'
+
   export default {
+
     data() {
-      var validateUsername = (rule, value, callback) => {
-        if (!value) {
-          return callback(new Error('用户名不能为空'));
-        }
-        return callback();
-      };
-      var validatePass = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请输入密码'));
-        } else {
-          callback();
-        }
-      };
-      var validateCaptcha = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请输入图片验证码'));
-        }
-        else {
-          callback();
-        }
-      };
       return {
         loginForm: {
           username: '',
@@ -53,13 +35,13 @@
         },
         rules2: {
           username: [
-            {validator: validateUsername, trigger: 'blur'}
+            {validator: validate.validateUsername, trigger: 'blur'}
           ],
           password: [
-            {validator: validatePass, trigger: 'blur'}
+            {validator: validate.validatePass, trigger: 'blur'}
           ],
           captcha: [
-            {validator: validateCaptcha, trigger: 'blur'}
+            {validator: validate.validateCaptcha, trigger: 'blur'}
           ]
         }
       };

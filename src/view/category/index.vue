@@ -6,7 +6,7 @@
     </div>
     <div class="right-forms">
       <div class="form-content">
-         <el-form  label-width="80px" :model="categoryModel">
+         <el-form  label-width="80px" :model="categoryModel" ref="categoryModel">
            <el-form-item label="名称">
              <el-input v-model="categoryModel.categoryName"></el-input>
            </el-form-item>
@@ -82,10 +82,19 @@
       }
     },
     methods: {
-      ...mapActions(['getCategoryList']),
-      onSubmit: function () {
-        let data=this.getCategoryList()
-        console.log(data)
+      ...mapActions(['getCategoryList','saveCategory']),
+      async onSubmit() {
+        console.log(this.categoryModel);
+//        保存
+        let result = await  this.saveCategory(this.categoryModel);
+        console.log(result);
+//        成功了以后刷新列表
+        var obj = {
+          "categoryId": null
+        }
+        let data=await this.getCategoryList(obj);
+        this.data.data=data;
+
       }
     }
   }
