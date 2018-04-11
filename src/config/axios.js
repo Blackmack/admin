@@ -8,6 +8,7 @@ const instance = axios.create({
   baseURL:env.baseUrl,
   timeout:1000,
   // headers: {'X-Requested-with':'XMLHttpRequest','Content-Type': 'application/x-www-form-urlencoded'}
+  headers: {'X-Requested-with':'XMLHttpRequest','Content-Type': 'application/json'}
 })
 
 axios.interceptors.request.use(function (config) {
@@ -21,7 +22,7 @@ axios.interceptors.request.use(function (config) {
 
 axios.interceptors.response.use(function (response) {
   //todo 发送请求前
-  return response
+  return  response
 },function (error) {
   //todo 请求异常时
   return Promise.reject(error)

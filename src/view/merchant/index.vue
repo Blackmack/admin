@@ -33,7 +33,7 @@
       <el-pagination
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
-        :current-page="currentPage"
+        :current-page="pagenation.currentPage"
         :page-sizes="[100, 200, 300, 400]"
         :page-size="100"
         layout="total, sizes, prev, pager, next, jumper"
@@ -46,12 +46,21 @@
   export default {
     data() {
       return {
+        input:0,
+        tableData3:[],
         pagenation: {
           currentPage: 3,
+          pageSize:10
         }
       }
     },
     methods: {
+      handleSizeChange(){
+
+      },
+      handleCurrentChange(){},
+      handleSelectionChange(){},
+      handleSelectionChange(){},
       deleteItem() {
         this.$confirm('确实要删除?', '提示', {
           confirmButtonText: '确定',

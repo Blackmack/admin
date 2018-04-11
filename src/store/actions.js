@@ -16,7 +16,7 @@ const actions ={
     let res= await getCategory(payload);
     return res;
   },
-  async savCategory({commit,state}, payload) {
+  async saveCategory({commit,state}, payload) {
     let res= await saveCategory(payload);
     return res;
   },
