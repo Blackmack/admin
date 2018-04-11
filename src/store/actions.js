@@ -2,7 +2,7 @@
  * Created by Administrator on 2018/3/29.
  */
 import {sysLogin,getCategory,saveCategory,updateCategory,deleteCategory,
-  getMerchant,saveMerchant,updateMerchant,delMerchant
+  getMerchant,saveMerchantModel,updateMerchantModel,delMerchantModel
 } from '../api/getData'
 import * as types  from './mutations-type'
 
@@ -36,15 +36,15 @@ const actions ={
     return res.data;
   },
   async saveMerchant({commit,state}, payload) {
-    let res= await saveMerchant(payload);
+    let res= await saveMerchantModel(payload);
     return res.data;
   },
   async updateMerchant({commit,state}, payload) {
-    let res= await updateMerchant(payload);
+    let res= await updateMerchantModel(payload);
     return res.data;
   },
   async deleteMerchant({commit,state}, payload) {
-    let res= await delMerchant(payload);
+    let res= await delMerchantModel(payload);
     return res.data;
   }
 

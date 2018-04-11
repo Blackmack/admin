@@ -40,15 +40,16 @@
       </el-pagination>
     </div>
     <el-dialog title="编辑商户信息" :visible.sync="dialogFormVisible">
-      <el-form :model="merchantModel">
+      <el-form :model="merchantModel" ref="merchantForm">
         <el-row>
           <el-col :span="12">
-            <el-form-item label="商户号" :label-width="formLabelWidth">
+            <el-form-item prop="merchant" label="商户号" :label-width="formLabelWidth"
+                :rules="[{ required: true, message: '商户号不能为空'}]">
               <el-input v-model="merchantModel.merchant" auto-complete="off"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="商户类型" :label-width="formLabelWidth">
+            <el-form-item prop="type" label="商户类型" :label-width="formLabelWidth" :rules="[{ required: true, message: '商户类型不能为空'}]">
               <el-select v-model="merchantModel.type" placeholder="请选择商户类型" style="width: 100%;">
                 <el-option label="银行" value="shanghai"></el-option>
                 <el-option label="卖肉的" value="beijing"></el-option>
@@ -58,12 +59,12 @@
         </el-row>
         <el-row>
           <el-col :span="12">
-            <el-form-item label="商户属性" :label-width="formLabelWidth">
+            <el-form-item prop="attribute" label="商户属性" :label-width="formLabelWidth" :rules="[{ required: true, message: '商户属性不能为空'}]">
               <el-input v-model="merchantModel.attribute" auto-complete="off"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="状态" :label-width="formLabelWidth">
+            <el-form-item prop="status" label="状态" :label-width="formLabelWidth" :rules="[{ required: true, message: '状态不能为空'}]">
               <el-select v-model="merchantModel.status" placeholder="请选择状态" style="width: 100%;">
                 <el-option label="2" value="shanghai"></el-option>
                 <el-option label="3" value="beijing"></el-option>
@@ -73,48 +74,48 @@
         </el-row>
         <el-row>
           <el-col :span="12">
-            <el-form-item label="商户全称" :label-width="formLabelWidth">
+            <el-form-item prop="name" label="商户全称" :label-width="formLabelWidth" :rules="[{ required: true, message: '商户全称不能为空'}]">
               <el-input v-model="merchantModel.name" auto-complete="off"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="商户简称" :label-width="formLabelWidth">
+            <el-form-item prop="abbreviations" label="商户简称" :label-width="formLabelWidth" :rules="[{ required: true, message: '商户简称不能为空'}]">
               <el-input v-model="merchantModel.abbreviations" auto-complete="off"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="12">
-            <el-form-item label="企业法人" :label-width="formLabelWidth">
+            <el-form-item prop="legalPerson" label="企业法人" :label-width="formLabelWidth" :rules="[{ required: true, message: '企业法人不能为空'}]">
               <el-input v-model="merchantModel.legalPerson" auto-complete="off"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="商家地址" :label-width="formLabelWidth">
+            <el-form-item prop="address" label="商家地址" :label-width="formLabelWidth" :rules="[{ required: true, message: '商家地址不能为空'}]">
               <el-input v-model="merchantModel.address" auto-complete="off"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="12">
-            <el-form-item label="联系电话" :label-width="formLabelWidth">
+            <el-form-item prop="contactNumber" label="联系电话" :label-width="formLabelWidth" :rules="[{ required: true, message: '联系电话不能为空'}]">
               <el-input v-model="merchantModel.contactNumber" auto-complete="off"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="传真" :label-width="formLabelWidth">
+            <el-form-item prop="fax" label="传真" :label-width="formLabelWidth" :rules="[{ required: true, message: '传真不能为空'}]">
               <el-input v-model="merchantModel.fax" auto-complete="off"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="12">
-            <el-form-item label="合同号" :label-width="formLabelWidth">
+            <el-form-item prop="contractNumber" label="合同号" :label-width="formLabelWidth" :rules="[{ required: true, message: '合同号不能为空'}]">
               <el-input v-model="merchantModel.contractNumber" auto-complete="off"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="认证时间" :label-width="formLabelWidth">
+            <el-form-item prop="authenticationDate" label="认证时间" :label-width="formLabelWidth" :rules="[{ required: true, message: '认证时间不能为空'}]">
               <el-date-picker v-model="merchantModel.authenticationDate" type="datetime" placeholder="选择日期时间" style="width: 100%;">
               </el-date-picker>
             </el-form-item>
@@ -123,7 +124,7 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+        <el-button type="primary" @click="saveMerchantForm('merchantForm')">确 定</el-button>
       </div>
     </el-dialog>
   </div>
@@ -179,8 +180,20 @@
               }
           })
       },
-      saveMerchant(){
-
+      saveMerchantForm(merchantForm){
+        console.log(this.merchantModel)
+        this.$refs[merchantForm].validate((valid) => {
+          if (valid) {
+            console.log(2)
+            console.log(this.merchantModel)
+            this.saveMerchant(this.merchantModel).then((data)=>{
+                console.log(data)
+            })
+          }
+        });
+      },
+      resetForm(merchantForm) {
+        this.$refs[merchantForm].resetFields();
       },
       deleteItem() {
         this.$confirm('确实要删除?', '提示', {
@@ -188,10 +201,15 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          this.$message({
-            type: 'success',
-            message: '删除成功!'
-          });
+            this.deleteMerchant({id:1}).then((data)=>{
+              if(data.code==0){
+                this.$message({
+                  type: 'success',
+                  message: '删除成功!'
+                });
+              }
+            })
+
         })
       },
       handleSelectionChange(){

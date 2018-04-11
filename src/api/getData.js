@@ -11,6 +11,6 @@ export const updateCategory = (data , payload)=>axios.post('/generator/category/
 export const deleteCategory = (data , payload)=>axios.post('/generator/category/delete',data)
 /******商户管理***********/
 export const getMerchant = (data , payload)=>axios.post('/merchantAccount//info',data)
-export const saveMerchant = (data , payload)=>axios.post('/merchantAccount//save',data)
-export const updateMerchant = (data , payload)=>axios.post('/merchantAccount//update',data)
-export const delMerchant = (data , payload)=>axios.post('/merchantAccount/delete',data)
+export const saveMerchantModel = (data , payload)=>axios.post('/merchantAccount/save',data)
+export const updateMerchantModel = (data , payload)=>axios.post('/merchantAccount/update',data)
+export const delMerchantModel = (data , payload)=>axios.post('/merchantAccount/delete',data)
