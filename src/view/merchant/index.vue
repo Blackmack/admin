@@ -160,6 +160,7 @@
         pagenation: {
           currentPage: 1,
         },
+        mutilsection:[],
         formLabelWidth: '120px'
       }
     },
@@ -201,7 +202,11 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-            this.deleteMerchant({id:1}).then((data)=>{
+            let ids=[];
+            for(var i=0;i<this.mutilsection.length;i++){
+              ids.push(this.mutilsection[i].id);
+            }
+            this.deleteMerchant({id:ids}).then((data)=>{
               if(data.code==0){
                 this.$message({
                   type: 'success',
@@ -212,8 +217,8 @@
 
         })
       },
-      handleSelectionChange(){
-
+      handleSelectionChange(arrSections){
+          this.mutilsection=arrSections
       },
       handleSizeChange(){
 
