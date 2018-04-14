@@ -29,6 +29,11 @@ export default new Router({
           path: '/merchant',
           name: 'Merchant',
           component: Merchant
+        },
+        {
+          path: '/logistics',
+          name: 'Logistics',
+          component: Logistics
         }
       ]
     }
