@@ -16,19 +16,19 @@ const actions ={
   /******品类管理**************/
   async getCategoryList({commit,state}, payload) {
     let res= await getCategory(payload);
-    return res;
+    return res.data;
   },
   async saveCategory({commit,state}, payload) {
     let res= await saveCategory(payload);
-    return res;
+    return res.data;
   },
   async updateCategory({commit,state}, payload) {
     let res= await updateCategory(payload);
-    return res;
+    return res.data;
   },
   async deleteCategory({commit,state}, payload) {
     let res= await deleteCategory(payload);
-    return res;
+    return res.data;
   },
   /************商户管理****************/
   async getMerchantList({commit,state}, payload) {

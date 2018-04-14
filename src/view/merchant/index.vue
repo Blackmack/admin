@@ -1,16 +1,16 @@
 <template>
   <div class="list">
     <div class="query-condition">
-      <el-input v-model="searchInfo.merchant" size="medium"  placeholder="请输入商户号" clearable></el-input>
-      <el-input v-model="searchInfo.name" size="medium" placeholder="请输入简称" clearable></el-input>
-      <el-input v-model="searchInfo.status" size="medium" placeholder="请输入状态" clearable></el-input>
-      <el-input v-model="searchInfo.type" size="medium" placeholder="请输入类型" clearable></el-input>
+      <el-input v-model="searchInfo.merchantsNo" size="medium"  placeholder="请输入商户号" clearable></el-input>
+      <el-input v-model="searchInfo.janeName" size="medium" placeholder="请输入简称" clearable></el-input>
+      <el-input v-model="searchInfo.state" size="medium" placeholder="请输入状态" clearable></el-input>
       <el-button type="primary" icon="el-icon-search" @click="getMechantList">搜索</el-button>
     </div>
     <div class="query-op">
       <el-button-group>
-        <el-button type="primary" icon="el-icon-plus" @click="dialogFormVisible = true"></el-button>
-        <el-button type="primary" icon="el-icon-delete" @click="deleteItem"></el-button>
+        <el-button type="success" icon="el-icon-plus" @click="dialogFormVisible = true">新增</el-button>
+        <el-button type="primary" icon="el-icon-edit" @click="editForm">修改</el-button>
+        <el-button type="danger" icon="el-icon-delete" @click="deleteItem">删除</el-button>
       </el-button-group>
     </div>
     <div class="list-table">
@@ -18,13 +18,22 @@
         @selection-change="handleSelectionChange">
         <el-table-column type="selection" width="55">
         </el-table-column>
-        <el-table-column prop="merchant" label="商户号" >
+        <el-table-column prop="merchantsNo" label="商户号" >
         </el-table-column>
-        <el-table-column prop="abbreviations" label="简称">
+        <el-table-column prop="fullName" label="商户全称">
         </el-table-column>
-        <el-table-column prop="status" label="状态" >
+        <el-table-column prop="janeName" label="简称">
         </el-table-column>
-        <el-table-column prop="type" label="类型">
+        <el-table-column prop="contractNo" label="合同号">
+        </el-table-column>
+        <el-table-column prop="phone" label="电话">
+        </el-table-column>
+        <el-table-column prop="legalPerson" label="企业法人">
+        </el-table-column>
+        <el-table-column prop="certificationTime" label="认证时间">
+        </el-table-column>
+        <el-table-column prop="state" label="状态" >
+            <template slot-scope="scope">{{ scope.row.state==1?'有效':'无效' }}</template>
         </el-table-column>
       </el-table>
     </div>
@@ -43,16 +52,16 @@
       <el-form :model="merchantModel" ref="merchantForm">
         <el-row>
           <el-col :span="12">
-            <el-form-item prop="merchant" label="商户号" :label-width="formLabelWidth"
+            <el-form-item prop="merchantsNo" label="商户号" :label-width="formLabelWidth"
                 :rules="[{ required: true, message: '商户号不能为空'}]">
-              <el-input v-model="merchantModel.merchant" auto-complete="off"></el-input>
+              <el-input v-model="merchantModel.merchantsNo" auto-complete="off"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item prop="type" label="商户类型" :label-width="formLabelWidth" :rules="[{ required: true, message: '商户类型不能为空'}]">
               <el-select v-model="merchantModel.type" placeholder="请选择商户类型" style="width: 100%;">
-                <el-option label="银行" value="shanghai"></el-option>
-                <el-option label="卖肉的" value="beijing"></el-option>
+                <el-option label="银行" value="1"></el-option>
+                <el-option label="卖肉的" value="2"></el-option>
               </el-select>
             </el-form-item>
           </el-col>
@@ -64,23 +73,23 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item prop="status" label="状态" :label-width="formLabelWidth" :rules="[{ required: true, message: '状态不能为空'}]">
-              <el-select v-model="merchantModel.status" placeholder="请选择状态" style="width: 100%;">
-                <el-option label="2" value="shanghai"></el-option>
-                <el-option label="3" value="beijing"></el-option>
+            <el-form-item prop="state" label="状态" :label-width="formLabelWidth" :rules="[{ required: true, message: '状态不能为空'}]">
+              <el-select v-model="merchantModel.state" placeholder="请选择状态" style="width: 100%;">
+                <el-option label="有效" value="true">有效</el-option>
+                <el-option label="无效" value="false">无效</el-option>
               </el-select>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="12">
-            <el-form-item prop="name" label="商户全称" :label-width="formLabelWidth" :rules="[{ required: true, message: '商户全称不能为空'}]">
-              <el-input v-model="merchantModel.name" auto-complete="off"></el-input>
+            <el-form-item prop="fullName" label="商户全称" :label-width="formLabelWidth" :rules="[{ required: true, message: '商户全称不能为空'}]">
+              <el-input v-model="merchantModel.fullName" auto-complete="off"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item prop="abbreviations" label="商户简称" :label-width="formLabelWidth" :rules="[{ required: true, message: '商户简称不能为空'}]">
-              <el-input v-model="merchantModel.abbreviations" auto-complete="off"></el-input>
+            <el-form-item prop="janeName" label="商户简称" :label-width="formLabelWidth" :rules="[{ required: true, message: '商户简称不能为空'}]">
+              <el-input v-model="merchantModel.janeName" auto-complete="off"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -98,8 +107,8 @@
         </el-row>
         <el-row>
           <el-col :span="12">
-            <el-form-item prop="contactNumber" label="联系电话" :label-width="formLabelWidth" :rules="[{ required: true, message: '联系电话不能为空'}]">
-              <el-input v-model="merchantModel.contactNumber" auto-complete="off"></el-input>
+            <el-form-item prop="phone" label="联系电话" :label-width="formLabelWidth" :rules="[{ required: true, message: '联系电话不能为空'}]">
+              <el-input v-model="merchantModel.phone" auto-complete="off"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -110,13 +119,13 @@
         </el-row>
         <el-row>
           <el-col :span="12">
-            <el-form-item prop="contractNumber" label="合同号" :label-width="formLabelWidth" :rules="[{ required: true, message: '合同号不能为空'}]">
-              <el-input v-model="merchantModel.contractNumber" auto-complete="off"></el-input>
+            <el-form-item prop="contractNo" label="合同号" :label-width="formLabelWidth" :rules="[{ required: true, message: '合同号不能为空'}]">
+              <el-input v-model="merchantModel.contractNo" auto-complete="off"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item prop="authenticationDate" label="认证时间" :label-width="formLabelWidth" :rules="[{ required: true, message: '认证时间不能为空'}]">
-              <el-date-picker v-model="merchantModel.authenticationDate" type="datetime" placeholder="选择日期时间" style="width: 100%;">
+            <el-form-item prop="certificationTime" label="认证时间" :label-width="formLabelWidth" :rules="[{ required: true, message: '认证时间不能为空'}]">
+              <el-date-picker v-model="merchantModel.certificationTime" type="datetime" value-format="yyyy-MM-dd HH:mm:ss" format="yyyy-MM-dd HH:mm:ss" placeholder="选择日期时间" style="width: 100%;">
               </el-date-picker>
             </el-form-item>
           </el-col>
@@ -138,28 +147,28 @@
         dialogFormVisible:false,
         tableData:[],
         searchInfo:{
-          merchant:'',
-          name:'',
-          status:'',
-          type:''
+          merchantsNo:'',
+          fullName:'',
+          state:''
         },
         merchantModel:{
-          merchant:'',
+          merchantsNo:'',
           type:'',
           attribute:'',
-          status:'',
-          name:'',
-          abbreviations:'',
+          state:null,
+          fullName:'',
+          janeName:'',
           legalPerson:'',
           address:'',
-          contactNumber:'',
+          phone:'',
           fax:'',
-          contractNumber:'',
-          authenticationDate:''
+          contractNo:'',
+          certificationTime:''
         },
         pagenation: {
           currentPage: 1,
         },
+        mutilsection:[],
         formLabelWidth: '120px'
       }
     },
@@ -173,7 +182,7 @@
           this.getMerchantList(param).then((data) =>{
               if(data.code==0){
                 this.loading = false;
-                this.tableData=data.date;
+                this.tableData=data.merchants;
               }
               else{
                 this.$message(data.msg);
@@ -184,11 +193,35 @@
         console.log(this.merchantModel)
         this.$refs[merchantForm].validate((valid) => {
           if (valid) {
-            console.log(2)
-            console.log(this.merchantModel)
-            this.saveMerchant(this.merchantModel).then((data)=>{
-                console.log(data)
-            })
+            if(this.merchantModel.merchantsId){
+              this.updateMerchant(this.merchantModel).then((data)=>{
+                if(data.code==0){
+                  this.$message({
+                    type:'success',
+                    message:'保存成功！'
+                  });
+                  this.getMechantList();
+                }
+                else{
+                  this.$message.error(data.msg);
+                }
+              })
+            }
+            else{
+              this.saveMerchant(this.merchantModel).then((data)=>{
+                if(data.code==0){
+                  this.$message({
+                    type:'success',
+                    message:'保存成功！'
+                  });
+                  this.getMechantList();
+                }
+                else{
+                  this.$message.error(data.msg);
+                }
+              })
+            }
+
           }
         });
       },
@@ -201,7 +234,11 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-            this.deleteMerchant({id:1}).then((data)=>{
+            let ids=[];
+            for(var i=0;i<this.mutilsection.length;i++){
+               ids.push(this.mutilsection[i].merchantsId)
+            }
+            this.deleteMerchant({fullName:ids.join()}).then((data)=>{
               if(data.code==0){
                 this.$message({
                   type: 'success',
@@ -212,8 +249,38 @@
 
         })
       },
-      handleSelectionChange(){
-
+      editForm(){
+          if(this.mutilsection.length>1){
+            this.$message({
+              type: 'warning',
+              message: '只能单条数据修改!'
+            });
+          }
+          else if(this.mutilsection.length==0){
+            this.$message({
+              type: 'warning',
+              message: '请选择一条数据修改!'
+            });
+          }
+          else{
+            this.dialogFormVisible=true;
+            this.merchantModel.merchantsId=this.mutilsection[0].merchantsId;
+            this.merchantModel.merchantsNo=this.mutilsection[0].merchantsNo;
+              this.merchantModel.type=this.mutilsection[0].type;
+              this.merchantModel.attribute=this.mutilsection[0].attribute;
+              this.merchantModel.state=this.mutilsection[0].state;
+              this.merchantModel.fullName=this.mutilsection[0].fullName;
+              this.merchantModel.janeName=this.mutilsection[0].janeName;
+              this.merchantModel.legalPerson=this.mutilsection[0].legalPerson;
+              this.merchantModel.address=this.mutilsection[0].address;
+              this.merchantModel.phone=this.mutilsection[0].phone;
+              this.merchantModel.fax=this.mutilsection[0].fax;
+              this.merchantModel.contractNo=this.mutilsection[0].contractNo;
+              this.merchantModel.certificationTime=this.mutilsection[0].certificationTime;
+          }
+      },
+      handleSelectionChange(arrSections){
+          this.mutilsection=arrSections
       },
       handleSizeChange(){
 
