@@ -21,7 +21,7 @@
                 <el-menu-item index="1-3">角色</el-menu-item>
               </el-menu-item-group>
             </el-submenu>
-            <el-menu-item index="/test2">
+            <el-menu-item index="/msarea">
               <i class="el-icon-menu"></i>
               <span slot="title">城市地域管理</span>
             </el-menu-item>

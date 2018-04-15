@@ -8,6 +8,7 @@ import Index from '../view/index'
 import Category from '../view/category/index'
 import Merchant from '../view/merchant/index'
 import Logistics from '../view/logistics/index'
+import Msarea from '../view/msarea/index'
 
 Vue.use(Router)
 
@@ -36,6 +37,11 @@ export default new Router({
           path: '/logistics',
           name: 'Logistics',
           component: Logistics
+        },
+        {
+          path: '/msarea',
+          name: 'Msarea',
+          component: Msarea
         }
       ]
     }

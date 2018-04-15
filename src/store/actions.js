@@ -3,7 +3,8 @@
  */
 import {sysLogin,getCategory,saveCategory,updateCategory,deleteCategory,
   getMerchant,saveMerchantModel,updateMerchantModel,delMerchantModel,
-  getLogisticsList,saveLogistics,updateLogistics,deleteLogistics
+  getLogisticsList,saveLogistics,updateLogistics,deleteLogistics,
+  saveMsArea,getMsAreaList
 } from '../api/getData'
 import * as types  from './mutations-type'
 
@@ -65,7 +66,17 @@ const actions ={
   async deleteLogistics({commit,state},payload){
     let res= await deleteLogistics(payload);
     return res.data;
-  }
+  },
+
+  /********地域***********/
+  async getMsAreaList({commit,state}, payload) {
+    let res= await getMsAreaList(payload);
+    return res.data;
+  },
+  async saveMsArea({commit,state},payload){
+    let res= await saveMsArea(payload);
+    return res.data;
+  },
 
 
 
