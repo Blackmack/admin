@@ -2,7 +2,8 @@
  * Created by Administrator on 2018/3/29.
  */
 import {sysLogin,getCategory,saveCategory,updateCategory,deleteCategory,
-  getMerchant,saveMerchantModel,updateMerchantModel,delMerchantModel
+  getMerchant,saveMerchantModel,updateMerchantModel,delMerchantModel,
+  getLogisticsList,saveLogistics,updateLogistics,deleteLogistics
 } from '../api/getData'
 import * as types  from './mutations-type'
 
@@ -46,7 +47,29 @@ const actions ={
   async deleteMerchant({commit,state}, payload) {
     let res= await delMerchantModel(payload);
     return res.data;
+  },
+
+  /********物流管理***********/
+  async getLogisticsList({commit,state}, payload) {
+    let res= await getLogisticsList(payload);
+    return res.data;
+  },
+  async saveLogistics({commit,state},payload){
+    let res= await saveLogistics(payload);
+    return res.data;
+  },
+  async updateLogistics({commit,state},payload){
+    let res= await updateLogistics(payload);
+    return res.data;
+  },
+  async deleteLogistics({commit,state},payload){
+    let res= await deleteLogistics(payload);
+    return res.data;
   }
+
+
+
+
 
 }
 

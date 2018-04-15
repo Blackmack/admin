@@ -14,3 +14,8 @@ export const getMerchant = (data , payload)=>axios.post('/service/queryMerchants
 export const saveMerchantModel = (data , payload)=>axios.post('/service/insertMerchants',data)
 export const updateMerchantModel = (data , payload)=>axios.post('/service/updateMerchants',data)
 export const delMerchantModel = (data , payload)=>axios.post('/service/updateChooseMerchants',data)
+/*******物流管理********/
+export const getLogisticsList = (data,payload) => axios.post('/service/queryMsLogistics',data);
+export const saveLogistics = (data,payload) => axios.post('/service/insertMsLogistics',data);
+export const updateLogistics = (data,payload) => axios.post('/service/updateMsLogistics',data);
+export const deleteLogistics = (data,payload) => axios.post('/service/updateMsLogistics',data);
