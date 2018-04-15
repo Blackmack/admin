@@ -7,7 +7,7 @@ import Login from '../view/sys/login'
 import Index from '../view/index'
 import Category from '../view/category/index'
 import Merchant from '../view/merchant/index'
-import Logistics from '../view/Logistics/index'
+import Logistics from '../view/logistics/index'
 
 Vue.use(Router)
 
