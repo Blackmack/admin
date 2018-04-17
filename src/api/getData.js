@@ -20,3 +20,9 @@ export const getMsArea = (data , payload)=>axios.post('/service/queryMsArea',dat
 export const saveMsAreaModel = (data , payload)=>axios.post('/service/insertMsArea',data)
 export const updateMsAreaModel = (data , payload)=>axios.post('service/updateMsArea',data)
 export const delMsAreaModel = (data , payload)=>axios.post('service/updateMsArea',data)
+
+/*******物流管理********/
+export const getLogisticsList = (data,payload) => axios.post('/service/queryMsLogistics',data);
+export const saveLogistics = (data,payload) => axios.post('/service/insertMsLogistics',data);
+export const updateLogistics = (data,payload) => axios.post('/service/updateMsLogistics',data);
+export const deleteLogistics = (data,payload) => axios.post('/service/updateMsLogistics',data);

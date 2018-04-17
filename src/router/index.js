@@ -7,7 +7,8 @@ import Login from '../view/sys/login'
 import Index from '../view/index'
 import Category from '../view/category/index'
 import Merchant from '../view/merchant/index'
-import MsArea from '../view/MsArea/index'
+import Logistics from '../view/logistics/index'
+import Msarea from '../view/msarea/index'
 Vue.use(Router)
 
 export default new Router({
@@ -32,9 +33,14 @@ export default new Router({
           component: Merchant
         },
         {
+          path: '/logistics',
+          name: 'Logistics',
+          component: Logistics
+        },
+        {
           path: '/msarea',
-          name: 'MsArea',
-          component: MsArea
+          name: 'Msarea',
+          component: Msarea
         }
       ]
     }

@@ -25,7 +25,7 @@
               <i class="el-icon-menu"></i>
               <span slot="title">城市地域管理</span>
             </el-menu-item>
-            <el-menu-item index="/test1">
+            <el-menu-item index="/logistics">
               <i class="el-icon-document"></i>
               <span slot="title">物流公司管理</span>
             </el-menu-item>
