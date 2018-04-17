@@ -14,3 +14,9 @@ export const getMerchant = (data , payload)=>axios.post('/service/queryMerchants
 export const saveMerchantModel = (data , payload)=>axios.post('/service/insertMerchants',data)
 export const updateMerchantModel = (data , payload)=>axios.post('/service/updateMerchants',data)
 export const delMerchantModel = (data , payload)=>axios.post('/service/updateChooseMerchants',data)
+
+/*******地区管理***********/
+export const getMsArea = (data , payload)=>axios.post('/service/queryMsArea',data)
+export const saveMsAreaModel = (data , payload)=>axios.post('/service/insertMsArea',data)
+export const updateMsAreaModel = (data , payload)=>axios.post('service/updateMsArea',data)
+export const delMsAreaModel = (data , payload)=>axios.post('service/updateMsArea',data)

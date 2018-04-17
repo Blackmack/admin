@@ -2,7 +2,8 @@
  * Created by Administrator on 2018/3/29.
  */
 import {sysLogin,getCategory,saveCategory,updateCategory,deleteCategory,
-  getMerchant,saveMerchantModel,updateMerchantModel,delMerchantModel
+  getMerchant,saveMerchantModel,updateMerchantModel,delMerchantModel,
+  getMsArea,saveMsAreaModel,updateMsAreaModel,delMsAreaModel
 } from '../api/getData'
 import * as types  from './mutations-type'
 
@@ -46,8 +47,24 @@ const actions ={
   async deleteMerchant({commit,state}, payload) {
     let res= await delMerchantModel(payload);
     return res.data;
+  },
+/************地区管理****************/
+async getMsAreaList({commit,state}, payload) {
+  let res= await getMsArea(payload);
+  return res.data;
+},
+  async saveMsArea({commit,state}, payload) {
+    let res= await saveMsAreaModel(payload);
+    return res.data;
+  },
+  async updateMsArea({commit,state}, payload) {
+    let res= await updateMsAreaModel(payload);
+    return res.data;
+  },
+  async delMsArea({commit,state}, payload) {
+    let res= await delMerchantModel(payload);
+    return res.data;
   }
-
 }
 
 export default actions;
