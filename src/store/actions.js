@@ -2,7 +2,7 @@
  * Created by Administrator on 2018/3/29.
  */
 import {sysLogin,getCategory,saveCategory,updateCategory,deleteCategory,
-  getMerchant,saveMerchantModel,updateMerchantModel,delMerchantModel,
+  getMerchant,getMerchantById,saveMerchantModel,updateMerchantModel,delMerchantModel,
   getMsArea,saveMsAreaModel,updateMsAreaModel,delMsAreaModel,
   getLogisticsList,saveLogistics,updateLogistics,deleteLogistics
 } from '../api/getData'
@@ -35,6 +35,10 @@ const actions ={
   /************商户管理****************/
   async getMerchantList({commit,state}, payload) {
     let res= await getMerchant(payload);
+    return res.data;
+  },
+  async getMerchantById({commit,state}, payload) {
+    let res= await getMerchantById(payload);
     return res.data;
   },
   async saveMerchant({commit,state}, payload) {
