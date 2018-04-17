@@ -3,7 +3,7 @@
  */
 import {sysLogin,getCategory,saveCategory,updateCategory,deleteCategory,
   getMerchant,saveMerchantModel,updateMerchantModel,delMerchantModel,
-  getMsArea,saveMsAreaModel,updateMsAreaModel,delMsAreaModel
+  getMsArea,saveMsAreaModel,updateMsAreaModel,delMsAreaModel,
   getLogisticsList,saveLogistics,updateLogistics,deleteLogistics
 } from '../api/getData'
 import * as types  from './mutations-type'
