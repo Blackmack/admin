@@ -14,8 +14,7 @@
       <el-tree :data="treeData" @node-click="nodeClick" :props="treeProps" show-checkbox default-expand-all node-key="id" ref="tree" highlight-current :expand-on-click-node="false">
                  <span class="custom-tree-node" slot-scope="{ node, data }">
                  <span>{{ node.label }}</span>
-                 <!--<span>-->
-                   <!--<el-button type="text" size="mini" @click="() => deleteCategoryItem(node, data)">删除</el-button></span>-->
+                 <span><el-button type="text" size="mini" @click="() => deleteCategoryItem(node, data)">删除</el-button></span>
                  </span>
       </el-tree>
     </div>

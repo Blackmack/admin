@@ -2,9 +2,9 @@
  * Created by Administrator on 2018/3/29.
  */
 import {sysLogin,getCategory,saveCategory,updateCategory,deleteCategory,
-  getMerchant,saveMerchantModel,updateMerchantModel,delMerchantModel,
-  getLogisticsList,saveLogistics,updateLogistics,deleteLogistics,
-  saveMsArea,getMsAreaList
+  getMerchant,getMerchantById,saveMerchantModel,updateMerchantModel,delMerchantModel,
+  getMsArea,saveMsAreaModel,updateMsAreaModel,delMsAreaModel,
+  getLogisticsList,saveLogistics,updateLogistics,deleteLogistics
 } from '../api/getData'
 import * as types  from './mutations-type'
 
@@ -37,6 +37,10 @@ const actions ={
     let res= await getMerchant(payload);
     return res.data;
   },
+  async getMerchantById({commit,state}, payload) {
+    let res= await getMerchantById(payload);
+    return res.data;
+  },
   async saveMerchant({commit,state}, payload) {
     let res= await saveMerchantModel(payload);
     return res.data;
@@ -46,6 +50,23 @@ const actions ={
     return res.data;
   },
   async deleteMerchant({commit,state}, payload) {
+    let res= await delMerchantModel(payload);
+    return res.data;
+  },
+/************地区管理****************/
+async getMsAreaList({commit,state}, payload) {
+  let res= await getMsArea(payload);
+  return res.data;
+},
+  async saveMsArea({commit,state}, payload) {
+    let res= await saveMsAreaModel(payload);
+    return res.data;
+  },
+  async updateMsArea({commit,state}, payload) {
+    let res= await updateMsAreaModel(payload);
+    return res.data;
+  },
+  async delMsArea({commit,state}, payload) {
     let res= await delMerchantModel(payload);
     return res.data;
   },
@@ -66,22 +87,7 @@ const actions ={
   async deleteLogistics({commit,state},payload){
     let res= await deleteLogistics(payload);
     return res.data;
-  },
-
-  /********地域***********/
-  async getMsAreaList({commit,state}, payload) {
-    let res= await getMsAreaList(payload);
-    return res.data;
-  },
-  async saveMsArea({commit,state},payload){
-    let res= await saveMsArea(payload);
-    return res.data;
-  },
-
-
-
-
-
+  }
 }
 
 export default actions;

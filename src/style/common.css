@@ -22,3 +22,26 @@ button, input, select, textarea { font-size:100%; }
 .fl{
   float: left;
 }
+.tree-wrap {
+    height: 100%;
+    .left-tree {
+      width: 220px;
+      height: 100%;
+      padding: 20px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    .right-forms {
+      height: 100%;
+      width: auto;
+      padding: 10px;
+      margin-left: 230px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+
+    .form-content {
+      width: 600px;
+    }
+  }
+}
