@@ -17,8 +17,6 @@ const state = {
    },
    token:'888888'
 }
-
-
 const store = new Vuex.Store({
    state,
   actions,

@@ -21,7 +21,7 @@ export const updateLogistics = (data,payload) => axios.post('/service/updateMsLo
 export const deleteLogistics = (data,payload) => axios.post('/service/updateMsLogistics',data);
 
 /*******地域管理**********/
-'getMsAreaList','saveMsArea','updateMsArea','deleteMsArea'
+// 'getMsAreaList','saveMsArea','updateMsArea','deleteMsArea'
 export const getMsAreaList = (data,payload) => axios.post('/service/queryMsArea',data);
 export const saveMsArea = (data,payload) => axios.post('/service/insertMsArea',data);
 // export const updateMsArea = (data,payload) => axios.post('/service/updateMsLogistics',data);
